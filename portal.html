@@ -45,12 +45,11 @@
         }
         .tool-card img {
             width: 100%;
-            height: 180px;
-            /* --- 將 cover 改為 contain 來確保圖片完整顯示 --- */
+            /* --- 將高度從 180px 增加到 220px，給圖片足夠空間 --- */
+            height: 220px; 
             object-fit: contain;
             border-bottom: 1px solid #eee;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
+            /* 移除圓角設定，因為 contain 模式下圖片不會接觸邊緣 */
         }
         .tool-info {
             padding: 20px;
