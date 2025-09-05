@@ -46,8 +46,11 @@
         .tool-card img {
             width: 100%;
             height: 180px;
-            object-fit: cover;
+            /* --- 將 cover 改為 contain 來確保圖片完整顯示 --- */
+            object-fit: contain;
             border-bottom: 1px solid #eee;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
         }
         .tool-info {
             padding: 20px;
