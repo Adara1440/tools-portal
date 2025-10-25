@@ -45,7 +45,9 @@
         }
         .tool-card img {
             width: 100%;
-            height: 220px; 
+            /* --- 移除固定高度，改用 1:1 比例 --- */
+            /* height: 220px; */ 
+            aspect-ratio: 1 / 1;
             object-fit: contain;
             border-bottom: 1px solid #eee;
         }
