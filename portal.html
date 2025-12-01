@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>創新中心｜AI 裝備站</title>
     <style>
-        /* --- 勇士隊配色變數與基礎設定 --- */
+        /* --- 勇士隊配色 (明亮版) --- */
         :root {
-            --warriors-blue: #1D428A;   /* 皇家藍 */
-            --warriors-gold: #FFC72C;   /* 金黃色 */
-            --bg-dark: #0B1830;         /* 極深藍 (背景用) */
-            --text-white: #FFFFFF;
-            --text-gray: #E0E0E0;
+            --warriors-blue: #1D428A;   /* 皇家藍 (文字/邊框) */
+            --warriors-gold: #FFC72C;   /* 金黃色 (亮點/按鈕) */
+            --bg-light: #F4F7F6;        /* 乾淨淺灰底 */
+            --card-bg: #FFFFFF;         /* 純白卡片 */
+            --text-dark: #1D428A;       /* 深色文字 (用勇士藍代替純黑) */
+            --text-gray: #555555;       /* 次要文字 */
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-white);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             margin: 0;
             padding: 40px 20px;
             display: flex;
@@ -28,98 +29,98 @@
 
         /* --- 標題區域 --- */
         h1 {
-            color: var(--warriors-gold);
+            color: var(--warriors-blue);
             font-size: 2.8em;
             margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-align: center;
+            font-weight: 800;
         }
 
         /* --- 篩選按鈕區域 --- */
         .filter-container {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .filter-btn {
-            background-color: transparent;
-            border: 2px solid var(--warriors-gold);
-            color: var(--warriors-gold);
-            padding: 10px 24px;
-            border-radius: 30px;
+            background-color: #fff;
+            border: 2px solid var(--warriors-blue);
+            color: var(--warriors-blue);
+            padding: 8px 24px;
+            border-radius: 50px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(29, 66, 138, 0.1);
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background-color: var(--warriors-gold);
-            color: var(--warriors-blue);
-            box-shadow: 0 0 15px rgba(255, 199, 44, 0.4);
+            background-color: var(--warriors-blue);
+            color: #fff; /* 反白效果 */
+            border-color: var(--warriors-blue);
+            box-shadow: 0 4px 12px rgba(29, 66, 138, 0.3);
         }
 
-        /* --- 卡片網格區域 --- */
+        /* --- 卡片網格區域 (改為橫向寬卡片佈局) --- */
         .tool-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            /* 調整 grid 寬度，讓卡片變成寬長型，RWD時自動變單欄 */
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1100px;
             margin-bottom: 60px;
         }
 
-        /* --- 卡片設計 --- */
+        /* --- 橫式卡片設計 --- */
         .tool-card {
-            background-color: var(--warriors-blue);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            background-color: var(--card-bg);
+            border: 1px solid #E0E0E0; /* 淡淡的邊框 */
+            border-left: 6px solid var(--warriors-gold); /* 左側金黃色飾條 */
+            border-radius: 12px;
             padding: 25px;
             text-decoration: none;
-            color: var(--text-white);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-dark);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            
+            /* 關鍵：Flexbox 讓內容橫向排列 */
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
+            
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .tool-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(255, 199, 44, 0.2);
-            border-color: var(--warriors-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(29, 66, 138, 0.15);
+            border-color: var(--warriors-blue); /* hover 時邊框變藍 */
         }
 
-        /* 分類標籤 */
-        .category-tag {
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--warriors-gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            display: inline-block;
-            background: rgba(255, 199, 44, 0.15);
-            padding: 4px 10px;
-            border-radius: 8px;
-            width: fit-content;
-        }
-
-        /* Emoji 圖示 */
+        /* Emoji 圖示 (放在左側) */
         .card-emoji {
-            font-size: 48px;
-            margin-bottom: 15px;
+            font-size: 42px;
+            margin-right: 25px; /* 與右邊文字拉開距離 */
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* 文字資訊區 (右側) */
+        .tool-info {
+            flex-grow: 1;
         }
 
         .tool-info h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.3em;
-            color: var(--text-white);
+            margin: 0 0 6px 0;
+            font-size: 1.25em;
+            color: var(--warriors-blue);
+            font-weight: 700;
         }
 
         .tool-info p {
@@ -127,6 +128,19 @@
             color: var(--text-gray);
             margin: 0;
             line-height: 1.5;
+        }
+
+        /* 分類標籤 (右上角小標籤) */
+        .category-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--warriors-blue);
+            background: rgba(255, 199, 44, 0.3); /* 金黃色淡背景 */
+            padding: 3px 8px;
+            border-radius: 4px;
         }
 
         /* 隱藏卡片的樣式 (用於篩選) */
@@ -137,42 +151,52 @@
         /* --- 其他工具連結區 --- */
         .other-tools-section {
             width: 100%;
-            max-width: 800px;
-            border-top: 1px solid rgba(255,255,255,0.2);
+            max-width: 900px;
+            border-top: 2px dashed #D0D0D0;
             padding-top: 40px;
             text-align: center;
         }
 
         .other-tools-section h2 {
-            color: var(--text-gray);
-            font-size: 1.5em;
-            margin-bottom: 20px;
+            color: var(--warriors-blue);
+            font-size: 1.4em;
+            margin-bottom: 25px;
         }
 
         .other-links {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
         }
 
         .link-pill {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: #fff;
             color: var(--text-gray);
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 8px 20px;
             border-radius: 50px;
             font-size: 14px;
             transition: all 0.2s ease;
-            border: 1px solid transparent;
+            border: 1px solid #ddd;
+            font-weight: 500;
         }
 
         .link-pill:hover {
-            background-color: transparent;
-            border-color: var(--warriors-gold);
-            color: var(--warriors-gold);
+            background-color: var(--warriors-blue);
+            color: #fff;
+            border-color: var(--warriors-blue);
         }
 
+        /* 手機版調整 */
+        @media (max-width: 600px) {
+            .tool-container {
+                grid-template-columns: 1fr; /* 手機變單欄 */
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -190,84 +214,84 @@
     <div class="tool-container">
 
         <a href="https://ai-team-frontend.vercel.app/" target="_blank" class="tool-card" data-category="text">
-            <span class="category-tag">📝 文案</span>
             <div class="card-emoji">✍️</div>
             <div class="tool-info">
                 <h3>投稿AI快打平台</h3>
                 <p>AI乖乖改寫腳本、標題、小編文</p>
             </div>
+            <span class="category-tag">文案</span>
         </a>
 
         <a href="https://chatgpt.com/g/g-CMlQ88dkU-zheng-yan-jiu-shi-xie-ju-ben" target="_blank" class="tool-card" data-category="text">
-            <span class="category-tag">📝 文案</span>
             <div class="card-emoji">🤖</div>
             <div class="tool-info">
                 <h3>投稿改寫機GPTs</h3>
                 <p>埋頭就是寫劇本</p>
             </div>
+            <span class="category-tag">文案</span>
         </a>
 
         <a href="https://chatgpt.com/g/g-689f14aa732081918a3f7d68c4f68865-metanei-rong-ying-li-gu-wen" target="_blank" class="tool-card" data-category="data">
-            <span class="category-tag">📊 數據</span>
             <div class="card-emoji">📈</div>
             <div class="tool-info">
                 <h3>Meta營利分析GPTs</h3>
                 <p>分析Meta內容營利數據調整策略</p>
             </div>
+            <span class="category-tag">數據</span>
         </a>
 
         <a href="https://chatgpt.com/g/g-685a0dd65e188191b33af516db091b2d-duan-ying-zu-yue-ping-ji-suan-ji" target="_blank" class="tool-card" data-category="data">
-            <span class="category-tag">📊 數據</span>
             <div class="card-emoji">🧮</div>
             <div class="tool-info">
                 <h3>短影組AI KPI計算機GPTs</h3>
                 <p>一鍵計算每月AI 評核指標</p>
             </div>
+            <span class="category-tag">數據</span>
         </a>
 
         <a href="https://sora-video-generator-production-5309.up.railway.app/" target="_blank" class="tool-card" data-category="video">
-            <span class="category-tag">🎬 影音</span>
             <div class="card-emoji">❄️</div>
             <div class="tool-info">
                 <h3>冷笑話AI短影製造機</h3>
                 <p>貼入諧音梗、冷笑話，生成Sora AI直短影</p>
             </div>
+            <span class="category-tag">影音</span>
         </a>
 
         <a href="https://web-production-f2eb.up.railway.app/" target="_blank" class="tool-card" data-category="video">
-            <span class="category-tag">🎬 影音</span>
             <div class="card-emoji">📦</div>
             <div class="tool-info">
                 <h3>AI網紅商品開箱</h3>
                 <p>上傳商品照及特色，生成亞洲網紅開箱直短影</p>
             </div>
+            <span class="category-tag">影音</span>
         </a>
 
         <a href="https://kongming-jimeng.vercel.app/" target="_blank" class="tool-card" data-category="video">
-            <span class="category-tag">🎬 影音</span>
             <div class="card-emoji">🤖</div>
             <div class="tool-info">
                 <h3>孔明短影工作台</h3>
                 <p>快速生成剪映腳本+即夢指令產製孔明說科技短影音</p>
             </div>
+            <span class="category-tag">影音</span>
         </a>
         
         <a href="https://www.ettoday.net/events/_renee/dialogue_generator/" target="_blank" class="tool-card" data-category="video">
-            <span class="category-tag">🎬 影音</span>
             <div class="card-emoji">💬</div>
             <div class="tool-info">
                 <h3>LINE聊天室模擬器</h3>
                 <p>快速生成仿LINE風格的對話紀錄圖片。</p>
             </div>
+            <span class="category-tag">影音</span>
         </a>
 
         <a href="https://my-schedule-helper.vercel.app/" target="_blank" class="tool-card" data-category="admin">
-            <span class="category-tag">⚡ 行政</span>
             <div class="card-emoji">💰</div>
             <div class="tool-info">
                 <h3>業配任務排程手</h3>
                 <p>業務案自動排程小幫手</p>
             </div>
+            <span class="category-tag">行政</span>
         </a>
 
     </div>
