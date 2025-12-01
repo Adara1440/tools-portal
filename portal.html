@@ -5,118 +5,312 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>創新中心｜AI 裝備站</title>
     <style>
-        /* --- CSS 樣式 --- */
+        /* --- 勇士隊配色變數與基礎設定 --- */
+        :root {
+            --warriors-blue: #1D428A;   /* 皇家藍 */
+            --warriors-gold: #FFC72C;   /* 金黃色 */
+            --bg-dark: #0B1830;         /* 極深藍 (背景用) */
+            --text-white: #FFFFFF;
+            --text-gray: #E0E0E0;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f4f7f6;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
             margin: 0;
-            padding: 40px;
+            padding: 40px 20px;
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
+
+        /* --- 標題區域 --- */
         h1 {
-            color: #f39c12;
-            font-size: 2.4em;
-            margin-bottom: 40px;
+            color: var(--warriors-gold);
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+            text-align: center;
         }
+
+        /* --- 篩選按鈕區域 --- */
+        .filter-container {
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            border: 2px solid var(--warriors-gold);
+            color: var(--warriors-gold);
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--warriors-gold);
+            color: var(--warriors-blue);
+            box-shadow: 0 0 15px rgba(255, 199, 44, 0.4);
+        }
+
+        /* --- 卡片網格區域 --- */
         .tool-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
             width: 100%;
             max-width: 1200px;
+            margin-bottom: 60px;
         }
+
+        /* --- 卡片設計 --- */
         .tool-card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            background-color: var(--warriors-blue);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
             text-decoration: none;
-            color: #333;
+            color: var(--text-white);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
+
         .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(255, 199, 44, 0.2);
+            border-color: var(--warriors-gold);
         }
-        .tool-card img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: contain;
-            border-bottom: 1px solid #eee;
+
+        /* 分類標籤 */
+        .category-tag {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--warriors-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: inline-block;
+            background: rgba(255, 199, 44, 0.15);
+            padding: 4px 10px;
+            border-radius: 8px;
+            width: fit-content;
         }
-        .tool-info {
-            padding: 20px;
-            flex-grow: 1;
+
+        /* Emoji 圖示 */
+        .card-emoji {
+            font-size: 48px;
+            margin-bottom: 15px;
         }
+
         .tool-info h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+            color: var(--text-white);
         }
+
         .tool-info p {
             font-size: 14px;
-            color: #666;
+            color: var(--text-gray);
             margin: 0;
-            min-height: 40px;
+            line-height: 1.5;
         }
+
+        /* 隱藏卡片的樣式 (用於篩選) */
+        .tool-card.hide {
+            display: none;
+        }
+
+        /* --- 其他工具連結區 --- */
+        .other-tools-section {
+            width: 100%;
+            max-width: 800px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 40px;
+            text-align: center;
+        }
+
+        .other-tools-section h2 {
+            color: var(--text-gray);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .other-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .link-pill {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .link-pill:hover {
+            background-color: transparent;
+            border-color: var(--warriors-gold);
+            color: var(--warriors-gold);
+        }
+
     </style>
 </head>
 <body>
+
     <h1>創新中心｜AI 裝備站</h1>
+
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterSelection('all')">全部</button>
+        <button class="filter-btn" onclick="filterSelection('text')">📝 文案</button>
+        <button class="filter-btn" onclick="filterSelection('data')">📊 數據</button>
+        <button class="filter-btn" onclick="filterSelection('video')">🎬 影音</button>
+        <button class="filter-btn" onclick="filterSelection('admin')">⚡ 行政</button>
+    </div>
+
     <div class="tool-container">
-        <a href="https://ai-team-frontend.vercel.app/" target="_blank" class="tool-card">
-            <img src="投稿AI快打平台.png" alt="投稿AI快打平台 工具截圖">
+
+        <a href="https://ai-team-frontend.vercel.app/" target="_blank" class="tool-card" data-category="text">
+            <span class="category-tag">📝 文案</span>
+            <div class="card-emoji">✍️</div>
             <div class="tool-info">
                 <h3>投稿AI快打平台</h3>
                 <p>AI乖乖改寫腳本、標題、小編文</p>
             </div>
         </a>
-        <a href="https://my-schedule-helper.vercel.app/" target="_blank" class="tool-card">
-            <img src="業配任務排程手.png" alt="業配任務排程手 工具截圖">
-            <div class="tool-info">
-                <h3>業配任務排程手</h3>
-                <p>業務案自動排程小幫手</p>
-            </div>
-        </a>
-        <a href="https://chatgpt.com/g/g-CMlQ88dkU-zheng-yan-jiu-shi-xie-ju-ben" target="_blank" class="tool-card">
-            <img src="投稿改寫機GPTs.png" alt="投稿改寫機GPTs 工具截圖">
+
+        <a href="https://chatgpt.com/g/g-CMlQ88dkU-zheng-yan-jiu-shi-xie-ju-ben" target="_blank" class="tool-card" data-category="text">
+            <span class="category-tag">📝 文案</span>
+            <div class="card-emoji">🤖</div>
             <div class="tool-info">
                 <h3>投稿改寫機GPTs</h3>
                 <p>埋頭就是寫劇本</p>
             </div>
         </a>
-        <a href="https://chatgpt.com/g/g-689f14aa732081918a3f7d68c4f68865-metanei-rong-ying-li-gu-wen" target="_blank" class="tool-card">
-            <img src="Meta營利分析GPTs.png" alt="Meta營利分析GPTs 工具截圖">
+
+        <a href="https://chatgpt.com/g/g-689f14aa732081918a3f7d68c4f68865-metanei-rong-ying-li-gu-wen" target="_blank" class="tool-card" data-category="data">
+            <span class="category-tag">📊 數據</span>
+            <div class="card-emoji">📈</div>
             <div class="tool-info">
                 <h3>Meta營利分析GPTs</h3>
-                <p>分析分潤數據提供策略</p>
+                <p>分析Meta內容營利數據調整策略</p>
             </div>
         </a>
-        <a href="https://chatgpt.com/g/g-685a0dd65e188191b33af516db091b2d-duan-ying-zu-yue-ping-ji-suan-ji" target="_blank" class="tool-card">
-            <img src="AI KPI計算機GPTs.png" alt="AI KPI計算機GPTs 工具截圖">
+
+        <a href="https://chatgpt.com/g/g-685a0dd65e188191b33af516db091b2d-duan-ying-zu-yue-ping-ji-suan-ji" target="_blank" class="tool-card" data-category="data">
+            <span class="category-tag">📊 數據</span>
+            <div class="card-emoji">🧮</div>
             <div class="tool-info">
-                <h3>AI KPI計算機GPTs</h3>
+                <h3>短影組AI KPI計算機GPTs</h3>
                 <p>一鍵計算每月AI 評核指標</p>
             </div>
         </a>
-        <a href="https://kongming-jimeng.vercel.app/" target="_blank" class="tool-card">
-            <img src="孔明短影工作台.png" alt="孔明短影工作台 工具截圖">
+
+        <a href="https://sora-video-generator-production-5309.up.railway.app/" target="_blank" class="tool-card" data-category="video">
+            <span class="category-tag">🎬 影音</span>
+            <div class="card-emoji">❄️</div>
             <div class="tool-info">
-                <h3>孔明短影工作台</h3>
-                <p>&nbsp;</p> 
+                <h3>冷笑話AI短影製造機</h3>
+                <p>貼入諧音梗、冷笑話，生成Sora AI直短影</p>
             </div>
         </a>
-        <a href="https://www.ettoday.net/events/_renee/dialogue_generator/" target="_blank" class="tool-card">
-            <img src="LINE聊天室模擬器.png" alt="LINE聊天室模擬器 工具截圖">
+
+        <a href="https://web-production-f2eb.up.railway.app/" target="_blank" class="tool-card" data-category="video">
+            <span class="category-tag">🎬 影音</span>
+            <div class="card-emoji">📦</div>
+            <div class="tool-info">
+                <h3>AI網紅商品開箱</h3>
+                <p>上傳商品照及特色，生成亞洲網紅開箱直短影</p>
+            </div>
+        </a>
+
+        <a href="https://kongming-jimeng.vercel.app/" target="_blank" class="tool-card" data-category="video">
+            <span class="category-tag">🎬 影音</span>
+            <div class="card-emoji">🤖</div>
+            <div class="tool-info">
+                <h3>孔明短影工作台</h3>
+                <p>快速生成剪映腳本+即夢指令產製孔明說科技短影音</p>
+            </div>
+        </a>
+        
+        <a href="https://www.ettoday.net/events/_renee/dialogue_generator/" target="_blank" class="tool-card" data-category="video">
+            <span class="category-tag">🎬 影音</span>
+            <div class="card-emoji">💬</div>
             <div class="tool-info">
                 <h3>LINE聊天室模擬器</h3>
                 <p>快速生成仿LINE風格的對話紀錄圖片。</p>
             </div>
         </a>
+
+        <a href="https://my-schedule-helper.vercel.app/" target="_blank" class="tool-card" data-category="admin">
+            <span class="category-tag">⚡ 行政</span>
+            <div class="card-emoji">💰</div>
+            <div class="tool-info">
+                <h3>業配任務排程手</h3>
+                <p>業務案自動排程小幫手</p>
+            </div>
+        </a>
+
     </div>
+
+    <div class="other-tools-section">
+        <h2>🛠️ 其他 AI 工具連結</h2>
+        <div class="other-links">
+            <a href="https://sora.com" target="_blank" class="link-pill">Sora</a>
+            <a href="https://jimeng.jianying.com/ai-tool/home" target="_blank" class="link-pill">即夢</a>
+            <a href="https://tinywow.com/" target="_blank" class="link-pill">tiny編輯免費工具</a>
+        </div>
+    </div>
+
+    <script>
+        // 篩選功能 Script
+        function filterSelection(category) {
+            var cards = document.getElementsByClassName("tool-card");
+            var btns = document.getElementsByClassName("filter-btn");
+
+            // 1. 處理卡片顯示/隱藏
+            if (category == "all") {
+                for (var i = 0; i < cards.length; i++) {
+                    cards[i].classList.remove("hide");
+                }
+            } else {
+                for (var i = 0; i < cards.length; i++) {
+                    if (cards[i].getAttribute("data-category") == category) {
+                        cards[i].classList.remove("hide");
+                    } else {
+                        cards[i].classList.add("hide");
+                    }
+                }
+            }
+
+            // 2. 處理按鈕 Active 狀態
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+                // 檢查按鈕的 onclick 內容是否包含當前 category
+                if (btns[i].getAttribute("onclick").includes("'" + category + "'")) {
+                    btns[i].classList.add("active");
+                }
+            }
+        }
+    </script>
 </body>
 </html>
