@@ -5,20 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>創新中心｜AI 裝備站</title>
     <style>
-        /* --- 賽博龐克變數設定 --- */
+        /* --- 賽博龐克變數 --- */
         :root {
-            --neon-blue: #00f3ff;       /* 霓虹青 */
-            --neon-gold: #ffd700;       /* 霓虹金 */
-            --neon-pink: #ff00ff;       /* 霓虹粉 (點綴用) */
-            --bg-dark: #050b14;         /* 極深藍黑 */
-            --card-bg: rgba(16, 33, 60, 0.7); /* 半透明深藍 */
+            --neon-blue: #00f3ff;
+            --neon-gold: #ffd700;
+            --bg-dark: #02060c; /* 更深邃的黑 */
             --text-main: #ffffff;
             --text-sub: #a0b0c0;
-            
-            /* 標籤顏色 (高亮螢光感) */
-            --tag-gpt-border: #00ff9d; --tag-gpt-text: #00ff9d;
-            --tag-video-border: #bc13fe; --tag-video-text: #bc13fe;
-            --tag-web-border: #ffae00; --tag-web-text: #ffae00;
         }
 
         body {
@@ -32,14 +25,14 @@
             color: var(--text-main);
             background-color: var(--bg-dark);
             
-            /* --- 賽博龐克背景網格 --- */
+            /* --- 升級版背景：模擬城市夜景光影 --- */
             background-image: 
-                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            
-            /* 頂部光暈 */
-            box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
+                radial-gradient(circle at 20% 30%, rgba(0, 243, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(0, 10, 20, 0.8) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 10, 20, 0.8) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+            background-attachment: fixed;
         }
 
         /* --- 標題區域 --- */
@@ -50,122 +43,118 @@
             text-align: center;
             font-weight: 900;
             text-transform: uppercase;
-            
-            /* 霓虹文字效果 */
             color: #fff;
+            /* 更強烈的標題發光 */
             text-shadow: 
-                0 0 5px #fff,
-                0 0 10px #fff,
+                0 0 10px var(--neon-blue),
                 0 0 20px var(--neon-blue),
                 0 0 40px var(--neon-blue);
-            
             position: relative;
             display: inline-block;
         }
         
-        /* 標題下方的雷射線 */
         h1::after {
             content: '';
             position: absolute;
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            height: 2px;
-            background: var(--neon-gold);
-            box-shadow: 0 0 10px var(--neon-gold), 0 0 20px var(--neon-gold);
+            width: 120%;
+            height: 3px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue);
+            border-radius: 50%;
         }
 
-        /* --- 分區標題樣式 --- */
+        /* --- 分區標題 --- */
         .section-header {
             width: 100%;
             max-width: 1100px;
-            margin-top: 40px;
-            margin-bottom: 25px;
+            margin-top: 50px;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
         }
 
         .section-header h2 {
-            font-size: 1.5em;
+            font-size: 1.6em;
             color: var(--neon-blue);
             margin: 0;
             display: flex;
             align-items: center;
-            gap: 12px;
-            text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+            gap: 15px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
             letter-spacing: 1px;
         }
 
         .section-line {
             flex-grow: 1;
-            height: 1px;
+            height: 2px;
             background: linear-gradient(90deg, var(--neon-blue), transparent);
             margin-left: 20px;
-            box-shadow: 0 0 5px var(--neon-blue);
+            box-shadow: 0 0 8px var(--neon-blue);
+            border-radius: 2px;
         }
 
-        /* --- 卡片網格區域 --- */
+        /* --- 卡片網格 --- */
         .tool-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 24px;
+            gap: 30px; /* 增加間距讓光暈更明顯 */
             width: 100%;
             max-width: 1100px;
-            margin-bottom: 60px;
         }
 
-        /* --- 賽博龐克卡片設計 --- */
+        /* --- 重寫：真・賽博龐克厚玻璃卡片 --- */
         .tool-card {
-            background: var(--card-bg);
-            /* 玻璃質感 + 邊框 */
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            border-left: 4px solid var(--neon-blue); /* 左側加粗 */
-            
-            backdrop-filter: blur(5px);
-            border-radius: 4px; /* 直角更符合科技感 */
+            /* 基礎玻璃層 */
+            background: rgba(10, 20, 40, 0.6); /* 深藍色半透明基底 */
+            backdrop-filter: blur(12px); /* 強力毛玻璃 */
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px; /* 稍微圓角，更有厚度感 */
             padding: 24px;
-            
             text-decoration: none;
             color: var(--text-main);
-            
             display: flex;
             flex-direction: row;
             align-items: center;
             position: relative;
-            
-            /* 預設微光 */
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            transition: all 0.2s ease;
             overflow: hidden;
-        }
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
-        /* 懸浮效果：強烈發光 */
-        .tool-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--neon-blue);
+            /* 關鍵：多重邊框與陰影製造「厚度」與「發光」 */
+            border: 2px solid rgba(255, 255, 255, 0.1); /* 最外層細白框 */
             box-shadow: 
-                0 0 20px rgba(0, 243, 255, 0.2),
-                inset 0 0 20px rgba(0, 243, 255, 0.1);
-            background: rgba(16, 33, 60, 0.9);
-            border-left-color: var(--neon-gold); /* 懸浮時左側變金 */
+                /* 內部發光 (模擬光線在玻璃內折射) */
+                inset 0 0 20px rgba(0, 243, 255, 0.2),
+                /* 邊緣高亮 (模擬玻璃切面) */
+                0 0 0 1px rgba(0, 243, 255, 0.5),
+                /* 外部強烈光暈 (Neon Glow) */
+                0 0 15px rgba(0, 243, 255, 0.4),
+                0 10px 30px rgba(0, 0, 0, 0.5); /* 底部深陰影製造懸浮感 */
         }
 
-        /* 掃光特效 */
-        .tool-card::after {
+        /* 增加玻璃表面的反射光澤感 */
+        .tool-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: skewX(-25deg);
-            transition: 0.5s;
+            top: 0; left: 0; right: 0; height: 50%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+            pointer-events: none;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
         }
-        
-        .tool-card:hover::after {
-            left: 150%;
+
+        /* 懸浮效果：全面強化 */
+        .tool-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(10, 20, 40, 0.8);
+            border-color: rgba(255, 255, 255, 0.4); /* 邊框變亮 */
+            box-shadow: 
+                inset 0 0 30px rgba(0, 243, 255, 0.4), /* 內部光更強 */
+                0 0 0 2px var(--neon-blue), /* 邊緣切面變霓虹藍 */
+                0 0 40px rgba(0, 243, 255, 0.6), /* 外部光暈大爆發 */
+                0 20px 40px rgba(0, 0, 0, 0.6); /* 懸浮感更重 */
         }
 
         /* 左側 Emoji */
@@ -174,25 +163,32 @@
             margin-right: 24px;
             min-width: 50px;
             text-align: center;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+            /* 讓 Emoji 也有發光感 */
+            filter: drop-shadow(0 0 8px var(--neon-blue));
+            transition: transform 0.3s ease;
+        }
+        .tool-card:hover .card-emoji {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 12px var(--neon-gold)); /* 懸浮變金光 */
         }
 
         /* 右側文字 */
         .tool-info {
             flex-grow: 1;
+            z-index: 2; /* 確保文字在反射層之上 */
         }
 
         .tool-info h3 {
-            margin: 0 0 8px 0;
-            font-size: 1.25em;
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
             color: #fff;
             font-weight: 700;
             letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         .tool-card:hover .tool-info h3 {
-            color: var(--neon-gold); /* 標題變色 */
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            color: var(--neon-blue);
         }
 
         .tool-info p {
@@ -201,12 +197,11 @@
             margin: 0;
             line-height: 1.5;
         }
-        
         .tool-card:hover .tool-info p {
-            color: #d0e0f0;
+            color: #fff;
         }
 
-        /* 分類標籤 (鏤空霓虹風格) */
+        /* 分類標籤 (高亮晶片感) */
         .category-tag {
             position: absolute;
             top: 15px;
@@ -214,18 +209,19 @@
             font-size: 10px;
             font-weight: 800;
             padding: 4px 10px;
-            border: 1px solid currentColor; /* 邊框跟著文字顏色 */
-            border-radius: 2px;
+            border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: rgba(0,0,0,0.3);
-            box-shadow: 0 0 5px currentColor;
+            /* 實心高亮背景 */
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 10px var(--neon-blue);
+            z-index: 2;
         }
-
-        /* 標籤顏色定義 */
-        .tag-gpt { color: var(--tag-gpt-text); border-color: var(--tag-gpt-border); }
-        .tag-video { color: var(--tag-video-text); border-color: var(--tag-video-border); }
-        .tag-web { color: var(--tag-web-text); border-color: var(--tag-web-border); }
+        /* 為不同分類設定不同光色 */
+        .tag-gpt { background: #00ff9d; box-shadow: 0 0 10px #00ff9d; }
+        .tag-video { background: #bc13fe; box-shadow: 0 0 10px #bc13fe; color: #fff;}
+        .tag-web { background: #ffae00; box-shadow: 0 0 10px #ffae00; }
 
 
         /* --- 底部連結區 --- */
@@ -236,7 +232,7 @@
             padding-top: 40px;
             text-align: center;
             margin-bottom: 40px;
-            margin-top: 40px;
+            margin-top: 60px;
         }
 
         .other-tools-section h2 {
@@ -255,20 +251,21 @@
         }
 
         .link-pill {
-            background-color: transparent;
-            color: var(--text-sub);
+            background-color: rgba(0, 243, 255, 0.1);
+            color: var(--neon-blue);
             text-decoration: none;
-            padding: 8px 24px;
+            padding: 10px 24px;
             border-radius: 50px;
             font-size: 14px;
             transition: all 0.2s ease;
-            border: 1px solid var(--text-sub);
+            border: 1px solid var(--neon-blue);
+            font-weight: 600;
         }
 
         .link-pill:hover {
-            border-color: var(--neon-blue);
-            color: var(--neon-blue);
-            box-shadow: 0 0 10px var(--neon-blue), inset 0 0 10px rgba(0, 243, 255, 0.2);
+            background-color: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-blue);
         }
 
         /* 手機版調整 */
