@@ -5,110 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>創新中心｜AI 裝備站</title>
     <style>
-        /* --- 勇士隊配色 (明亮版) --- */
+        /* --- 賽博龐克變數設定 --- */
         :root {
-            --warriors-blue: #1D428A;   /* 皇家藍 */
-            --warriors-gold: #FFC72C;   /* 金黃色 */
-            --bg-light: #F4F7F6;        /* 淺灰底 */
-            --card-bg: #FFFFFF;
-            --text-dark: #1D428A;
-            --text-gray: #555555;
+            --neon-blue: #00f3ff;       /* 霓虹青 */
+            --neon-gold: #ffd700;       /* 霓虹金 */
+            --neon-pink: #ff00ff;       /* 霓虹粉 (點綴用) */
+            --bg-dark: #050b14;         /* 極深藍黑 */
+            --card-bg: rgba(16, 33, 60, 0.7); /* 半透明深藍 */
+            --text-main: #ffffff;
+            --text-sub: #a0b0c0;
             
-            /* 分類標籤顏色 */
-            --tag-gpt-bg: #E8F5E9; --tag-gpt-text: #2E7D32; /* 綠色 */
-            --tag-video-bg: #F3E5F5; --tag-video-text: #7B1FA2; /* 紫色 */
-            --tag-web-bg: #FFF8E1; --tag-web-text: #F57F17; /* 橘黃色 */
+            /* 標籤顏色 (高亮螢光感) */
+            --tag-gpt-border: #00ff9d; --tag-gpt-text: #00ff9d;
+            --tag-video-border: #bc13fe; --tag-video-text: #bc13fe;
+            --tag-web-border: #ffae00; --tag-web-text: #ffae00;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             margin: 0;
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            color: var(--text-main);
+            background-color: var(--bg-dark);
+            
+            /* --- 賽博龐克背景網格 --- */
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            
+            /* 頂部光暈 */
+            box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
         }
 
         /* --- 標題區域 --- */
         h1 {
-            color: var(--warriors-blue);
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            letter-spacing: 1px;
+            font-size: 3em;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
             text-align: center;
-            font-weight: 800;
-            border-bottom: 5px solid var(--warriors-gold);
-            padding-bottom: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            
+            /* 霓虹文字效果 */
+            color: #fff;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--neon-blue),
+                0 0 40px var(--neon-blue);
+            
+            position: relative;
             display: inline-block;
+        }
+        
+        /* 標題下方的雷射線 */
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 2px;
+            background: var(--neon-gold);
+            box-shadow: 0 0 10px var(--neon-gold), 0 0 20px var(--neon-gold);
         }
 
         /* --- 分區標題樣式 --- */
         .section-header {
             width: 100%;
             max-width: 1100px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 40px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
         }
 
         .section-header h2 {
             font-size: 1.5em;
-            color: var(--warriors-blue);
+            color: var(--neon-blue);
             margin: 0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+            letter-spacing: 1px;
         }
 
         .section-line {
             flex-grow: 1;
-            height: 2px;
-            background-color: #E0E0E0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--neon-blue), transparent);
             margin-left: 20px;
+            box-shadow: 0 0 5px var(--neon-blue);
         }
 
         /* --- 卡片網格區域 --- */
         .tool-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 20px;
+            gap: 24px;
             width: 100%;
             max-width: 1100px;
-            margin-bottom: 50px; /* 區塊間距 */
+            margin-bottom: 60px;
         }
 
-        /* --- 橫式卡片設計 --- */
+        /* --- 賽博龐克卡片設計 --- */
         .tool-card {
-            background-color: var(--card-bg);
-            border: 1px solid #E0E0E0;
-            border-radius: 12px;
-            padding: 20px;
+            background: var(--card-bg);
+            /* 玻璃質感 + 邊框 */
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-left: 4px solid var(--neon-blue); /* 左側加粗 */
+            
+            backdrop-filter: blur(5px);
+            border-radius: 4px; /* 直角更符合科技感 */
+            padding: 24px;
+            
             text-decoration: none;
-            color: var(--text-dark);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: var(--text-main);
+            
             display: flex;
             flex-direction: row;
             align-items: center;
             position: relative;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            
+            /* 預設微光 */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.2s ease;
+            overflow: hidden;
         }
 
+        /* 懸浮效果：強烈發光 */
         .tool-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(29, 66, 138, 0.15);
-            border-color: var(--warriors-blue);
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            box-shadow: 
+                0 0 20px rgba(0, 243, 255, 0.2),
+                inset 0 0 20px rgba(0, 243, 255, 0.1);
+            background: rgba(16, 33, 60, 0.9);
+            border-left-color: var(--neon-gold); /* 懸浮時左側變金 */
+        }
+
+        /* 掃光特效 */
+        .tool-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+        }
+        
+        .tool-card:hover::after {
+            left: 150%;
         }
 
         /* 左側 Emoji */
         .card-emoji {
-            font-size: 36px;
-            margin-right: 20px;
-            min-width: 45px;
+            font-size: 40px;
+            margin-right: 24px;
+            min-width: 50px;
             text-align: center;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
         }
 
         /* 右側文字 */
@@ -117,82 +183,99 @@
         }
 
         .tool-info h3 {
-            margin: 0 0 5px 0;
-            font-size: 1.2em;
-            color: var(--warriors-blue);
+            margin: 0 0 8px 0;
+            font-size: 1.25em;
+            color: #fff;
             font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .tool-card:hover .tool-info h3 {
+            color: var(--neon-gold); /* 標題變色 */
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
         }
 
         .tool-info p {
-            font-size: 13px;
-            color: var(--text-gray);
+            font-size: 14px;
+            color: var(--text-sub);
             margin: 0;
-            line-height: 1.4;
+            line-height: 1.5;
+        }
+        
+        .tool-card:hover .tool-info p {
+            color: #d0e0f0;
         }
 
-        /* 分類標籤 (右上角) */
+        /* 分類標籤 (鏤空霓虹風格) */
         .category-tag {
             position: absolute;
             top: 15px;
             right: 15px;
-            font-size: 11px;
-            font-weight: bold;
+            font-size: 10px;
+            font-weight: 800;
             padding: 4px 10px;
-            border-radius: 20px;
+            border: 1px solid currentColor; /* 邊框跟著文字顏色 */
+            border-radius: 2px;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.3);
+            box-shadow: 0 0 5px currentColor;
         }
 
         /* 標籤顏色定義 */
-        .tag-gpt { background-color: var(--tag-gpt-bg); color: var(--tag-gpt-text); }
-        .tag-video { background-color: var(--tag-video-bg); color: var(--tag-video-text); }
-        .tag-web { background-color: var(--tag-web-bg); color: var(--tag-web-text); }
+        .tag-gpt { color: var(--tag-gpt-text); border-color: var(--tag-gpt-border); }
+        .tag-video { color: var(--tag-video-text); border-color: var(--tag-video-border); }
+        .tag-web { color: var(--tag-web-text); border-color: var(--tag-web-border); }
 
 
         /* --- 底部連結區 --- */
         .other-tools-section {
             width: 100%;
             max-width: 900px;
-            border-top: 2px dashed #D0D0D0;
-            padding-top: 30px;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+            padding-top: 40px;
             text-align: center;
             margin-bottom: 40px;
+            margin-top: 40px;
         }
 
         .other-tools-section h2 {
-            color: var(--text-gray);
-            font-size: 1.2em;
-            margin-bottom: 20px;
+            color: var(--text-sub);
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .other-links {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 15px;
         }
 
         .link-pill {
-            background-color: #fff;
-            color: var(--text-gray);
+            background-color: transparent;
+            color: var(--text-sub);
             text-decoration: none;
-            padding: 8px 20px;
+            padding: 8px 24px;
             border-radius: 50px;
             font-size: 14px;
             transition: all 0.2s ease;
-            border: 1px solid #ddd;
-            font-weight: 500;
+            border: 1px solid var(--text-sub);
         }
 
         .link-pill:hover {
-            background-color: var(--warriors-blue);
-            color: #fff;
-            border-color: var(--warriors-blue);
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue), inset 0 0 10px rgba(0, 243, 255, 0.2);
         }
 
         /* 手機版調整 */
         @media (max-width: 600px) {
             .tool-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2em; }
+            body { padding: 20px 15px; }
         }
     </style>
 </head>
@@ -206,11 +289,11 @@
     </div>
     <div class="tool-grid">
         
-        <a href="https://web-production-f2eb.up.railway.app/" target="_blank" class="tool-card">
-            <div class="card-emoji">📦</div>
+        <a href="https://news-video-generator-production.up.railway.app/" target="_blank" class="tool-card">
+            <div class="card-emoji">⚡</div>
             <div class="tool-info">
-                <h3>AI網紅商品開箱</h3>
-                <p>上傳商品照及特色，生成亞洲網紅開箱直短影</p>
+                <h3>ETtoday 新聞影音快剪器</h3>
+                <p>快速剪輯新聞影片，自動生成字幕與特效</p>
             </div>
             <span class="category-tag tag-video">VIDEO AI</span>
         </a>
@@ -218,8 +301,17 @@
         <a href="https://ai-news-video-vercel.vercel.app/" target="_blank" class="tool-card">
             <div class="card-emoji">📰</div>
             <div class="tool-info">
-                <h3>ETtoday 新聞短影製片</h3>
+                <h3>Sora新聞影音製片</h3>
                 <p>輸入新聞連結，自動摘要並生成短影音腳本與影片</p>
+            </div>
+            <span class="category-tag tag-video">VIDEO AI</span>
+        </a>
+
+        <a href="https://web-production-f2eb.up.railway.app/" target="_blank" class="tool-card">
+            <div class="card-emoji">📦</div>
+            <div class="tool-info">
+                <h3>AI網紅商品開箱</h3>
+                <p>上傳商品照及特色，生成亞洲網紅開箱直短影</p>
             </div>
             <span class="category-tag tag-video">VIDEO AI</span>
         </a>
