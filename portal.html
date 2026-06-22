@@ -44,7 +44,6 @@
             font-weight: 900;
             text-transform: uppercase;
             color: #fff;
-            /* 更強烈的標題發光 */
             text-shadow: 
                 0 0 10px var(--neon-blue),
                 0 0 20px var(--neon-blue),
@@ -69,7 +68,7 @@
         /* --- 分區標題 --- */
         .section-header {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1300px; /* 寬度加寬，縮小左右留空 */
             margin-top: 50px;
             margin-bottom: 30px;
             display: flex;
@@ -99,20 +98,19 @@
         /* --- 卡片網格 --- */
         .tool-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 30px; /* 增加間距讓光暈更明顯 */
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* 縮小留空，卡片放大 */
+            gap: 30px;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1300px; /* 寬度加寬，縮小左右留空 */
         }
 
         /* --- 真・賽博龐克厚玻璃卡片 --- */
         .tool-card {
-            /* 基礎玻璃層 */
-            background: rgba(10, 20, 40, 0.6); /* 深藍色半透明基底 */
-            backdrop-filter: blur(12px); /* 強力毛玻璃 */
+            background: rgba(10, 20, 40, 0.6);
+            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-radius: 12px; /* 稍微圓角，更有厚度感 */
-            padding: 24px;
+            border-radius: 12px;
+            padding: 26px; /* 微調內部間距讓卡片更有分量 */
             text-decoration: none;
             color: var(--text-main);
             display: flex;
@@ -121,20 +119,14 @@
             position: relative;
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-
-            /* 關鍵：多重邊框與陰影製造「厚度」與「發光」 */
-            border: 2px solid rgba(255, 255, 255, 0.1); /* 最外層細白框 */
+            border: 2px solid rgba(255, 255, 255, 0.1);
             box-shadow: 
-                /* 內部發光 */
                 inset 0 0 20px rgba(0, 243, 255, 0.2),
-                /* 邊緣高亮 */
                 0 0 0 1px rgba(0, 243, 255, 0.5),
-                /* 外部強烈光暈 */
                 0 0 15px rgba(0, 243, 255, 0.4),
-                0 10px 30px rgba(0, 0, 0, 0.5); /* 底部深陰影 */
+                0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* 增加玻璃表面的反射光澤感 */
         .tool-card::before {
             content: '';
             position: absolute;
@@ -145,7 +137,6 @@
             border-top-right-radius: 12px;
         }
 
-        /* 懸浮效果 */
         .tool-card:hover {
             transform: translateY(-10px) scale(1.02);
             background: rgba(10, 20, 40, 0.8);
@@ -157,11 +148,10 @@
                 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* 左側 Emoji */
         .card-emoji {
-            font-size: 40px;
+            font-size: 42px; /* 圖示微放大 */
             margin-right: 24px;
-            min-width: 50px;
+            min-width: 55px;
             text-align: center;
             filter: drop-shadow(0 0 8px var(--neon-blue));
             transition: transform 0.3s ease;
@@ -171,7 +161,6 @@
             filter: drop-shadow(0 0 12px var(--neon-gold));
         }
 
-        /* 右側文字 */
         .tool-info {
             flex-grow: 1;
             z-index: 2;
@@ -179,7 +168,7 @@
 
         .tool-info h3 {
             margin: 0 0 10px 0;
-            font-size: 1.3em;
+            font-size: 1.35em; /* 標題文字微放大 */
             color: #fff;
             font-weight: 700;
             letter-spacing: 0.5px;
@@ -200,7 +189,6 @@
             color: #fff;
         }
 
-        /* 分類標籤 */
         .category-tag {
             position: absolute;
             top: 15px;
@@ -220,7 +208,6 @@
         .tag-video { background: #bc13fe; box-shadow: 0 0 10px #bc13fe; color: #fff;}
         .tag-web { background: #ffae00; box-shadow: 0 0 10px #ffae00; }
 
-        /* --- 底部連結區 --- */
         .other-tools-section {
             width: 100%;
             max-width: 900px;
@@ -288,15 +275,6 @@
                 <p>自動掃描新聞網站，智慧判定適合派發之漫劇或Rap新聞題材</p>
             </div>
             <span class="category-tag tag-web">AI VISION</span>
-        </a>
-
-        <a href="https://news-video-generator-production.up.railway.app/" target="_blank" class="tool-card">
-            <div class="card-emoji">⚡</div>
-            <div class="tool-info">
-                <h3>新聞雷達 / 監測系統</h3>
-                <p>即時監測跨媒體動態，自動爬取競媒報告供編輯台決策</p>
-            </div>
-            <span class="category-tag tag-video">MONITOR</span>
         </a>
 
     </div>
@@ -370,6 +348,15 @@
             <span class="category-tag tag-video">VIDEO AI</span>
         </a>
 
+        <a href="https://dog-sora-vercel.vercel.app/" target="_blank" class="tool-card">
+            <div class="card-emoji">🐶</div>
+            <div class="tool-info">
+                <h3>還沒離職的貓狗小編</h3>
+                <p>快速產製高質感 Shorts 寵物 IP 影像素材</p>
+            </div>
+            <span class="category-tag tag-video">IP VIDEO</span>
+        </a>
+
     </div>
 
     <div class="section-header">
@@ -405,19 +392,10 @@
             <span class="category-tag tag-video">MANHUA AI</span>
         </a>
 
-        <a href="https://dog-sora-vercel.vercel.app/" target="_blank" class="tool-card">
-            <div class="card-emoji">🐶</div>
-            <div class="tool-info">
-                <h3>還沒離職的貓狗小編</h3>
-                <p>快速產製高質感 Shorts 寵物 IP 影像素材</p>
-            </div>
-            <span class="category-tag tag-video">IP VIDEO</span>
-        </a>
-
     </div>
 
     <div class="section-header">
-        <h2>⚡ 網站平台與營運分析區</h2>
+        <h2>⚡ 泰格與雪兒專區</h2>
         <div class="section-line"></div>
     </div>
     <div class="tool-grid">
