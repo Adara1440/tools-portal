@@ -105,7 +105,7 @@
             max-width: 1100px;
         }
 
-        /* --- 重寫：真・賽博龐克厚玻璃卡片 --- */
+        /* --- 真・賽博龐克厚玻璃卡片 --- */
         .tool-card {
             /* 基礎玻璃層 */
             background: rgba(10, 20, 40, 0.6); /* 深藍色半透明基底 */
@@ -125,13 +125,13 @@
             /* 關鍵：多重邊框與陰影製造「厚度」與「發光」 */
             border: 2px solid rgba(255, 255, 255, 0.1); /* 最外層細白框 */
             box-shadow: 
-                /* 內部發光 (模擬光線在玻璃內折射) */
+                /* 內部發光 */
                 inset 0 0 20px rgba(0, 243, 255, 0.2),
-                /* 邊緣高亮 (模擬玻璃切面) */
+                /* 邊緣高亮 */
                 0 0 0 1px rgba(0, 243, 255, 0.5),
-                /* 外部強烈光暈 (Neon Glow) */
+                /* 外部強烈光暈 */
                 0 0 15px rgba(0, 243, 255, 0.4),
-                0 10px 30px rgba(0, 0, 0, 0.5); /* 底部深陰影製造懸浮感 */
+                0 10px 30px rgba(0, 0, 0, 0.5); /* 底部深陰影 */
         }
 
         /* 增加玻璃表面的反射光澤感 */
@@ -145,16 +145,16 @@
             border-top-right-radius: 12px;
         }
 
-        /* 懸浮效果：全面強化 */
+        /* 懸浮效果 */
         .tool-card:hover {
             transform: translateY(-10px) scale(1.02);
             background: rgba(10, 20, 40, 0.8);
-            border-color: rgba(255, 255, 255, 0.4); /* 邊框變亮 */
+            border-color: rgba(255, 255, 255, 0.4);
             box-shadow: 
-                inset 0 0 30px rgba(0, 243, 255, 0.4), /* 內部光更強 */
-                0 0 0 2px var(--neon-blue), /* 邊緣切面變霓虹藍 */
-                0 0 40px rgba(0, 243, 255, 0.6), /* 外部光暈大爆發 */
-                0 20px 40px rgba(0, 0, 0, 0.6); /* 懸浮感更重 */
+                inset 0 0 30px rgba(0, 243, 255, 0.4),
+                0 0 0 2px var(--neon-blue),
+                0 0 40px rgba(0, 243, 255, 0.6),
+                0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
         /* 左側 Emoji */
@@ -163,19 +163,18 @@
             margin-right: 24px;
             min-width: 50px;
             text-align: center;
-            /* 讓 Emoji 也有發光感 */
             filter: drop-shadow(0 0 8px var(--neon-blue));
             transition: transform 0.3s ease;
         }
         .tool-card:hover .card-emoji {
             transform: scale(1.1);
-            filter: drop-shadow(0 0 12px var(--neon-gold)); /* 懸浮變金光 */
+            filter: drop-shadow(0 0 12px var(--neon-gold));
         }
 
         /* 右側文字 */
         .tool-info {
             flex-grow: 1;
-            z-index: 2; /* 確保文字在反射層之上 */
+            z-index: 2;
         }
 
         .tool-info h3 {
@@ -201,7 +200,7 @@
             color: #fff;
         }
 
-        /* 分類標籤 (高亮晶片感) */
+        /* 分類標籤 */
         .category-tag {
             position: absolute;
             top: 15px;
@@ -212,17 +211,14 @@
             border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            /* 實心高亮背景 */
             background: var(--neon-blue);
             color: #000;
             box-shadow: 0 0 10px var(--neon-blue);
             z-index: 2;
         }
-        /* 為不同分類設定不同光色 */
         .tag-gpt { background: #00ff9d; box-shadow: 0 0 10px #00ff9d; }
         .tag-video { background: #bc13fe; box-shadow: 0 0 10px #bc13fe; color: #fff;}
         .tag-web { background: #ffae00; box-shadow: 0 0 10px #ffae00; }
-
 
         /* --- 底部連結區 --- */
         .other-tools-section {
@@ -268,7 +264,6 @@
             box-shadow: 0 0 15px var(--neon-blue);
         }
 
-        /* 手機版調整 */
         @media (max-width: 600px) {
             .tool-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2em; }
@@ -281,13 +276,39 @@
     <h1>創新中心｜ＡＩ中控台</h1>
 
     <div class="section-header">
+        <h2>📡 策略選題與監測區</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="tool-grid">
+        
+        <a href="https://web-production-8edb9.up.railway.app/" target="_blank" class="tool-card">
+            <div class="card-emoji">🛰️</div>
+            <div class="tool-info">
+                <h3>AI影音選題中心</h3>
+                <p>自動掃描新聞網站，智慧判定適合派發之漫劇或Rap新聞題材</p>
+            </div>
+            <span class="category-tag tag-web">AI VISION</span>
+        </a>
+
+        <a href="https://news-video-generator-production.up.railway.app/" target="_blank" class="tool-card">
+            <div class="card-emoji">⚡</div>
+            <div class="tool-info">
+                <h3>新聞雷達 / 監測系統</h3>
+                <p>即時監測跨媒體動態，自動爬取競媒報告供編輯台決策</p>
+            </div>
+            <span class="category-tag tag-video">MONITOR</span>
+        </a>
+
+    </div>
+
+    <div class="section-header">
         <h2>🎬 影音區</h2>
         <div class="section-line"></div>
     </div>
     <div class="tool-grid">
         
         <a href="https://news-video-generator-production.up.railway.app/" target="_blank" class="tool-card">
-            <div class="card-emoji">⚡</div>
+            <div class="card-emoji">✂️</div>
             <div class="tool-info">
                 <h3>ETtoday 新聞影音快剪器</h3>
                 <p>快速剪輯新聞影片，自動生成字幕與特效</p>
@@ -299,7 +320,7 @@
             <div class="card-emoji">🔒</div>
             <div class="tool-info">
                 <h3>ETtoday 新聞快剪 (內網版)</h3>
-                <p>快速剪輯新聞影片，內網專用環境</p>
+                <p>快速剪輯新聞影片，內網專用安全環境</p>
             </div>
             <span class="category-tag tag-video">VIDEO AI</span>
         </a>
@@ -308,25 +329,25 @@
             <div class="card-emoji">📰</div>
             <div class="tool-info">
                 <h3>新聞AI影音製片</h3>
-                <p>輸入新聞連結，自動摘要並生成短影音腳本與影片</p>
+                <p>輸入新聞連結，自動摘要並生成短影音腳本與影片素材</p>
             </div>
             <span class="category-tag tag-video">VIDEO AI</span>
+        </a>
+
+        <a href="https://web-production-4aebe.up.railway.app/" target="_blank" class="tool-card">
+            <div class="card-emoji">🎤</div>
+            <div class="tool-info">
+                <h3>Rap說新聞</h3>
+                <p>將生硬新聞改寫為節奏感強烈的 Rap 歌詞，全自動生成音樂影音</p>
+            </div>
+            <span class="category-tag tag-video">MUSIC AI</span>
         </a>
 
         <a href="https://web-production-f2eb.up.railway.app/" target="_blank" class="tool-card">
             <div class="card-emoji">📦</div>
             <div class="tool-info">
                 <h3>AI網紅商品開箱</h3>
-                <p>上傳商品照及特色，生成亞洲網紅開箱直短影</p>
-            </div>
-            <span class="category-tag tag-video">VIDEO AI</span>
-        </a>
-
-        <a href="https://dog-sora-vercel.vercel.app/" target="_blank" class="tool-card">
-            <div class="card-emoji">🐶</div>
-            <div class="tool-info">
-                <h3>還沒離職的貓狗小編</h3>
-                <p>快速產製高質感 Shorts 寵物短影音素材</p>
+                <p>上傳商品照及特色，結合精準對嘴技術生成虛擬網紅開箱短影</p>
             </div>
             <span class="category-tag tag-video">VIDEO AI</span>
         </a>
@@ -335,7 +356,7 @@
             <div class="card-emoji">❄️</div>
             <div class="tool-info">
                 <h3>冷笑話AI短影製造機</h3>
-                <p>貼入諧音梗、冷笑話，生成 AI 直短影</p>
+                <p>貼入諧音梗、冷笑話，自動轉譯高衝突感直式迷因短影</p>
             </div>
             <span class="category-tag tag-video">VIDEO AI</span>
         </a>
@@ -344,7 +365,7 @@
             <div class="card-emoji">🤖</div>
             <div class="tool-info">
                 <h3>孔明短影工作台</h3>
-                <p>快速生成剪映腳本+即夢指令產製孔明說科技短影音</p>
+                <p>快速生成剪映腳本與即夢運鏡指令，打造諸葛亮說科技短影</p>
             </div>
             <span class="category-tag tag-video">VIDEO AI</span>
         </a>
@@ -361,41 +382,60 @@
             <div class="card-emoji">📖</div>
             <div class="tool-info">
                 <h3>漫劇製片（短劇）</h3>
-                <p>將短劇腳本轉換為韓漫風格短影音，包含分鏡與配音</p>
+                <p>將短劇腳本轉換為韓漫風格短影音，實現高角色一致性與克隆配音</p>
             </div>
-            <span class="category-tag tag-video">VIDEO AI</span>
+            <span class="category-tag tag-video">MANHUA AI</span>
         </a>
 
         <a href="https://health-manwa-production.up.railway.app/" target="_blank" class="tool-card">
             <div class="card-emoji">💊</div>
             <div class="tool-info">
                 <h3>知識漫劇區（醫藥）</h3>
-                <p>將醫療衛教知識轉換為專業與趣味兼具的漫劇影音</p>
+                <p>將醫療衛教與科普知識轉譯為專業與趣味兼具的漫劇視覺影音</p>
             </div>
-            <span class="category-tag tag-video">VIDEO AI</span>
+            <span class="category-tag tag-video">MANHUA AI</span>
         </a>
 
         <a href="https://news-drama.up.railway.app/" target="_blank" class="tool-card">
             <div class="card-emoji">🗞️</div>
             <div class="tool-info">
                 <h3>新聞漫劇引擎</h3>
-                <p>以漫劇敘事重現新聞事件，打造高討論度的社群影音</p>
+                <p>以漫劇敘事風格重現重大新聞事件，建立高討論度社群 IP</p>
             </div>
-            <span class="category-tag tag-video">VIDEO AI</span>
+            <span class="category-tag tag-video">MANHUA AI</span>
+        </a>
+
+        <a href="https://dog-sora-vercel.vercel.app/" target="_blank" class="tool-card">
+            <div class="card-emoji">🐶</div>
+            <div class="tool-info">
+                <h3>還沒離職的貓狗小編</h3>
+                <p>快速產製高質感 Shorts 寵物 IP 影像素材</p>
+            </div>
+            <span class="category-tag tag-video">IP VIDEO</span>
         </a>
 
     </div>
 
     <div class="section-header">
-        <h2>⚡ 網站平台與行政</h2>
+        <h2>⚡ 網站平台與營運分析區</h2>
         <div class="section-line"></div>
     </div>
     <div class="tool-grid">
+        
+        <a href="https://tagshareig.vercel.app/" target="_blank" class="tool-card">
+            <div class="card-emoji">📊</div>
+            <div class="tool-info">
+                <h3>泰格與雪兒IG分析顧問</h3>
+                <p>串接 META API 抓取成效數據與留言，深度診斷頻道成長並一鍵產出月報</p>
+            </div>
+            <span class="category-tag tag-web">ANALYTICS</span>
+        </a>
+
         <a href="https://ai-team-frontend.vercel.app/" target="_blank" class="tool-card">
             <div class="card-emoji">💻</div>
             <div class="tool-info">
                 <h3>泰格與雪兒投稿儀表板</h3>
-                <p>AI乖乖改寫腳本、標題、小編文</p>
+                <p>AI改寫腳本、標題、小編社群文案，加速稿件編採作業</p>
             </div>
             <span class="category-tag tag-web">WEB APP</span>
         </a>
@@ -404,7 +444,7 @@
             <div class="card-emoji">💰</div>
             <div class="tool-info">
                 <h3>業配任務排程手</h3>
-                <p>業務案自動排程小幫手</p>
+                <p>業務案排程自動化讀寫小幫手，消除跨平台重置成本</p>
             </div>
             <span class="category-tag tag-web">WEB APP</span>
         </a>
